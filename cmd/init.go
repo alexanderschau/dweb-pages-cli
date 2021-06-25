@@ -22,6 +22,12 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 
+		settings := types.Settings{
+			Api:       "localhost:5001",
+			Current:   "/ipfs/bafybeiczsscdsbs7ffqz55asqdf3smv6klcw3gofszvwlyarci47bgf354",
+			OutputDir: ".",
+		}
+
 		if _, err := os.Stat(".dweb-pages/settings.json"); !os.IsNotExist(err) {
 			rewrite := false
 			prompt := &survey.Confirm{
@@ -31,12 +37,12 @@ to quickly create a Cobra application.`,
 			if !rewrite {
 				return
 			}
-		}
 
-		settings := types.Settings{
-			Api:       "localhost:5001",
-			Current:   "/ipfs/bafybeiczsscdsbs7ffqz55asqdf3smv6klcw3gofszvwlyarci47bgf354",
-			OutputDir: ".",
+			out, err := ioutil.ReadFile(".dweb-pages/settings.json")
+			if err != nil {
+				panic(err)
+			}
+			json.Unmarshal(out, &settings)
 		}
 
 		survey.AskOne(&survey.Input{
@@ -52,7 +58,10 @@ to quickly create a Cobra application.`,
 			Default: settings.OutputDir,
 		}, &settings.OutputDir)
 
-		jsn, _ := json.Marshal(settings)
+		jsn, err := json.Marshal(settings)
+		if err != nil {
+			panic(err)
+		}
 		os.Mkdir(".dweb-pages", 0755)
 		ioutil.WriteFile(".dweb-pages/settings.json", jsn, 0644)
 	},
