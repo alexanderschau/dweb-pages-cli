@@ -7,10 +7,11 @@ import (
 	"go.alxs.xyz/dweb-pages/types"
 )
 
-func UpdateSettings(settings types.Settings, cid string) {
+func UpdateSettings(settings types.Settings) {
 	jsn, err := json.Marshal(settings)
 	if err != nil {
 		panic(err)
 	}
 	ioutil.WriteFile(".dweb-pages/settings.json", jsn, 0644)
+	Then(settings)
 }

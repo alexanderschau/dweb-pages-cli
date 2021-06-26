@@ -59,8 +59,10 @@ var addCmd = &cobra.Command{
 			sendError(err)
 		}
 
-		settings.Current = fmt.Sprintf("/ipfs/%s", resCid)
-		functions.UpdateSettings(settings, resCid)
+		if settings.CurrentIPNS {
+			settings.Current = fmt.Sprintf("/ipfs/%s", resCid)
+			functions.UpdateSettings(settings)
+		}
 
 		fmt.Println(resCid)
 

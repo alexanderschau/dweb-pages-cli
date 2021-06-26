@@ -17,9 +17,11 @@ var initCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		settings := types.Settings{
-			Api:       "localhost:5001",
-			Current:   "/ipfs/bafybeiczsscdsbs7ffqz55asqdf3smv6klcw3gofszvwlyarci47bgf354",
-			OutputDir: ".",
+			Api:         "localhost:5001",
+			Current:     "/ipns/pages-init.dweb.party",
+			CurrentIPNS: true,
+			OutputDir:   ".",
+			Then:        ".dweb-pages/then.sh",
 		}
 
 		if _, err := os.Stat(".dweb-pages/settings.json"); !os.IsNotExist(err) {
@@ -47,6 +49,10 @@ var initCmd = &cobra.Command{
 			Message: "Initial project",
 			Default: settings.Current,
 		}, &settings.Current)
+		survey.AskOne(&survey.Confirm{
+			Message: "Should we update this value on each change?",
+			Default: settings.CurrentIPNS,
+		}, &settings.CurrentIPNS)
 		survey.AskOne(&survey.Input{
 			Message: "Output directory",
 			Default: settings.OutputDir,
