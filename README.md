@@ -1,5 +1,5 @@
 # Dweb Pages CLI
-CLI tool to track versions of a static directory.
+![Hero image](preview.png)
 ## Install
 All binaries can be found at our [GitHub Release Page](https://github.com/alexanderschau/dweb-pages-cli/releases), but you can also use our install script to install or update the tool.
 ```sh
