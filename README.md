@@ -13,7 +13,7 @@ To start a new project simply type:
 dweb-pages init
 ```
 This will guide you through the setup process. The tool will then automatically create a new subdirectory called `.dweb-pages`. This is the place, where all settings and files related to Dweb Pages are stored.
-### Add a version
+### Add tags
 The versioning system of Dweb Pages is inspired by Git. Like there, you can create multiple "branches" and "commits".
 
 To add a new version run the following command:
@@ -21,7 +21,8 @@ To add a new version run the following command:
 dweb-pages add -t default -t main/latest -t main/v2
 ```
 For each deployment you can add as much tags, as you want.
-### Remove a tag
+> If you want to add a tag retrospectively, enter the versions CID as argument. This will prevent `dweb-pages` from fetching the directory.
+### Remove tags
 ```sh
 dweb-pages rm -t main/v2
 ```

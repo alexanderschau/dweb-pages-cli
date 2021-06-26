@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strings"
 
@@ -20,7 +21,7 @@ func sendError(err error) {
 
 // addCmd represents the add command
 var addCmd = &cobra.Command{
-	Use:   "add",
+	Use:   "add <cid>",
 	Short: "Add content to an existing project",
 	Long:  `This command adds a folder to an existing project.`,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -32,9 +33,16 @@ var addCmd = &cobra.Command{
 
 		sh := shell.NewShell("localhost:5001")
 
-		hash, err := sh.AddDir(settings.OutputDir)
-		if err != nil {
-			panic(err)
+		var hash string
+
+		if len(args) == 1 {
+			hash = args[0]
+		} else {
+			dirHash, err := sh.AddDir(settings.OutputDir)
+			if err != nil {
+				log.Fatal(err)
+			}
+			hash = dirHash
 		}
 
 		dir, err := sh.ObjectGet(settings.Current)
