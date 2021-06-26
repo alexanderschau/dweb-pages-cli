@@ -1,3 +1,5 @@
+package=dweb-pages
+
 build:
 	env GOOS=darwin GOARCH=amd64 go build -o dist/${package}_${version}_Darwin_x86_64
 
