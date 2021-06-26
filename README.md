@@ -21,7 +21,7 @@ To add a new version run the following command:
 dweb-pages add -t default -t main/latest -t main/v2
 ```
 For each deployment you can add as much tags, as you want.
-> If you want to add a tag retrospectively, enter the versions CID as argument. This will prevent `dweb-pages` from fetching the directory.
+> If you want to add a tag retrospectively, enter the versions CID as an argument. This will prevent `dweb-pages` from fetching the directory.
 ### Remove tags
 ```sh
 dweb-pages rm -t main/v2
