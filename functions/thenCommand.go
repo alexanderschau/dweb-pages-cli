@@ -19,6 +19,5 @@ func Then(settings types.Settings) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("Waiting for postprocessing command to finish...")
 	err = cmd.Wait()
 }
