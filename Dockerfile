@@ -7,6 +7,9 @@ RUN CGO_ENABLED=0 go build -o waitForIpfs action/waitForIpfs/waitForIpfs.go
 
 FROM ipfs/go-ipfs:v0.9.0
 
+LABEL org.opencontainers.image.authors="Alexander Schau <alexander@schau.email>"
+LABEL org.opencontainers.image.source https://github.com/alexanderschau/dweb-pages-cli
+
 USER root
 
 COPY --from=build /app/dweb-pages /bin/dweb-pages
